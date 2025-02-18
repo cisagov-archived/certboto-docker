@@ -11,6 +11,7 @@ import time
 
 # Third-Party Libraries
 import pytest
+from semver import parse_version_info
 
 <<<<<<< HEAD
 READY_MESSAGE = "Syncing certbot configs"
@@ -85,6 +86,7 @@ def test_log_version(dockerc, project_version, version_container):
     """Verify the container outputs the correct version to the logs."""
     # make sure container exited if running test isolated
     dockerc.wait(version_container.id)
+<<<<<<< HEAD
     log_output = version_container.logs().strip()
 <<<<<<< HEAD
     pkg_vars = {}
@@ -97,6 +99,11 @@ def test_log_version(dockerc, project_version, version_container):
     assert (
         log_output == project_version
 >>>>>>> 0d48ebd47a28a887868ea3093e675e95f3843561
+=======
+    log_version = parse_version_info(version_container.logs().strip())
+    assert log_version == parse_version_info(
+        project_version
+>>>>>>> 0a2e987b9184ecff808992e27f4898ddc7cc5d22
     ), f"Container version output to log does not match project version file {VERSION_FILE}"
 
 
